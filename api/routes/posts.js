@@ -2,7 +2,7 @@ const router = require("express").Router(); // prepare to use express framework 
 const User = require("../models/User");     // prepare to use UserSchema
 const Post = require("../models/Post");     // prepare to use UserSchema
 
-//CREATE POST
+//CREATE a new POST
 router.post("/", async (req,res) => {   // create POST router ("/:id")
     const newPost = new Post(req.body);   // request user type in and save to "newPost" variable
     try{
@@ -38,7 +38,27 @@ router.put("/:id", async (req,res) => {   // update new post router ("/:id")
     }
 });
 
-// DELETE POST
+// DELETE New POST
+router.delete("/:id", async (req,res) => {   // update new post router ("/:id")
+    try {
+        const post = await Post.findById(req.params.id);
+        if(post.username === req.body.username){
+            try {
+                // console.log(post);
+                // console.log(typeof post.deleteOne);
+                
+                await post.deleteOne();
+                res.status(200).json("Post has been deleted...");
+            } catch (err) {
+                res.status(500).json(err);
+            }
+        }else{
+            res.status(401).json("You can delete only your post!");
+        }
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
 
 // GET
 router.get("/:id", async (req,res) => {   // create get router ("/:id")
