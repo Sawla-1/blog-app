@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const authRoute = require("./routes/auth"); // prepare to indicate router
 const userRoute = require("./routes/users")
+const postRoute = require("./routes/posts")
 
 dotenv.config();
 app.use(express.json());                    // to able to get respon with json type data
@@ -19,6 +20,7 @@ mongoose
 
 app.use("/api/auth", authRoute);            // indicating route
 app.use("/api/users", userRoute);           // indicating route
+app.use("/api/posts", postRoute);           // indicating route
 
 app.listen("5000", ()=>{
     console.log("Backend is running.");
