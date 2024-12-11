@@ -49,11 +49,13 @@ router.delete("/:id", async (req,res) => {   // create register router ("/:id")
 });
 
 // GET
-router.get("/:id", async (req,res) => {   // create register router ("/:id")
+router.get("/:id", async (req,res) => {   // create get router ("/:id")
     try{
-        
+        const user = await User.findById(req.params.id);
+        const {password, ...others} = user._doc;
+        res.status(200).json(others);
     } catch(err){
-        res.status(404).json("User not found!");          // send error respond
+        res.status(500).json(err);          // send error respond
     }
 });
 
