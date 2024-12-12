@@ -6,6 +6,7 @@ const authRoute = require("./routes/auth"); // prepare to indicate router
 const userRoute = require("./routes/users");
 const postRoute = require("./routes/posts");
 const categoryRoute = require("./routes/categories");
+const multer = require("multer");           // this is a library that we can upload our files
 
 dotenv.config();
 app.use(express.json());                    // to able to get respon with json type data
@@ -18,6 +19,23 @@ mongoose
     })
     .then(console.log("Connected to MongoDB"))
     .catch((err)=> console.log(err));
+
+// To upload images or files using multer library
+// Create storage and indicate this images folder
+const storage = multer.diskStorage({
+    destination:(req, file, cb)=>{
+        cb(null, "images");
+    },
+    filename: (req,file,cb) =>{
+        // cb(null,req.body.name);
+        cb(null,"hello.jpg");
+    },
+});
+// Upload image or file
+const upload = multer({ storage: storage });
+app.post("/api/upload", upload.single("file"), (req,res) =>{
+    res.status(200).json("File has been uploaded")
+});
 
 app.use("/api/auth", authRoute);            // indicating route
 app.use("/api/users", userRoute);           // indicating route
