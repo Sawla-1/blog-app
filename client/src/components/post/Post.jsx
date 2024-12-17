@@ -1,28 +1,23 @@
 import "./post.css"
 
-export default function Post() {
+export default function Post({post}) {
   return (
     <div className="post">
-      <img src="https://i.pinimg.com/736x/e5/2a/7c/e52a7c54f203f3ab593f79c32099dd07.jpg" alt="" className="postImg" />
+      {post.photo && (
+        <img src={post.photo} alt="" className="postImg" />
+      )}
       <div className="postInfo">
         <div className="postCats">
-          <span className="postCat">Music</span>
-          <span className="postCat">Life</span>
+          {post.categories.map((c)=>{
+          <span className="postCat">{c.name}</span>
+          })}
         </div>
-        <span className="postTitle">Lorem ipsum dolor sit amet</span>
+        <span className="postTitle">{post.title}</span>
         <hr />
-        <span className="postDate">1 hour ago</span>
+        <span className="postDate">{new Date(post.createdAt).toDateString()}</span>
       </div>
       <p className="postDesc">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati 
-        fugit, officiis aperiam id odio hic vel aspernatur corrupti in molestiae
-         dolorem nemo, doloribus laboriosam quasi sint reprehenderit pariatur vero corporis!
-         Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati 
-        fugit, officiis aperiam id odio hic vel aspernatur corrupti in molestiae
-         dolorem nemo, doloribus laboriosam quasi sint reprehenderit pariatur vero corporis!
-         Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati 
-        fugit, officiis aperiam id odio hic vel aspernatur corrupti in molestiae
-         dolorem nemo, doloribus laboriosam quasi sint reprehenderit pariatur vero corporis!
+        {post.desc}
       </p>
     </div>
   )
