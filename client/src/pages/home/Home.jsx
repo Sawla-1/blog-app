@@ -16,6 +16,7 @@ export default function Home() {
     }
     fetchPosts();
   },[]);
+  // Normal
   return (
     <>
       <Header/>
