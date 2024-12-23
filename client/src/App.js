@@ -8,8 +8,7 @@ import Register from "./pages/register/Register";
 import {
   BrowserRouter as Router,
   Routes,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
 function App() {

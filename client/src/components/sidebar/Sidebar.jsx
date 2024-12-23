@@ -5,17 +5,17 @@ import "./sidebar.css"
 
 export default function Sidebar() {
 
-  const [cats,setCats] = useState({});
+  const [cats,setCats] = useState([]);
 
   useEffect(()=>{
     const getCats = async () => {
       const res = await axios.get("/categories");
-      console.log(res.data);
+      // console.log(res.data);
       setCats(res.data);
     };
     getCats();
   },[])
-
+  
   return (
     <div className="sidebar">
       <div className="sidebarItem">
@@ -32,7 +32,7 @@ export default function Sidebar() {
       <span className="sidebarTitle">CATEGORIES</span>
         <ul className="sidebarList">
             {cats.map((c)=>(
-              <li className="sidebarListItem">{c.name}</li>
+                <li className="sidebarListItem">{c.name}</li>
             ))}
         </ul>
       </div>
