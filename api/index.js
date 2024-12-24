@@ -7,9 +7,11 @@ const userRoute = require("./routes/users");
 const postRoute = require("./routes/posts");
 const categoryRoute = require("./routes/categories");
 const multer = require("multer");           // this is a library that we can upload our files
+const path = require("path");
 
 dotenv.config();
 app.use(express.json());                    // to able to get respon with json type data
+app.use("/images", express.static(path.join(__dirname,"/images")))
 
 mongoose
     .connect(process.env.MONGO_URL, {
@@ -27,8 +29,8 @@ const storage = multer.diskStorage({
         cb(null, "images");
     },
     filename: (req,file,cb) =>{
-        // cb(null,req.body.name);
-        cb(null,"hello.jpg");
+        cb(null,req.body.name);
+        // cb(null,"hello.jpg");
     },
 });
 // Upload image or file
