@@ -18,6 +18,7 @@ mongoose
         // useNewUrlParser:true, // no longer valid in newer version
         // useUnifiedTopology:true, // no longer valid in newer version
         // useCreateIndex:true, // Remove this line which no longer valid in newer version.
+        // useFindAndModify:true // Remove this line which no longer valid in newer version.
     })
     .then(console.log("Connected to MongoDB"))
     .catch((err)=> console.log(err));
